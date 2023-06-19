@@ -25,8 +25,9 @@ ResourceManager::~ResourceManager(){
 
 void ResourceManager::loadTexture(const std::string& name, const char* file){
     SDL_Texture* tex = IMG_LoadTexture(renderer, file);
-    textures.emplace(name, tex);                       // keep this here even if texture doesnt load successfully as to not cause crashes in other classes trying to access tex
-
+    /* insert texture even if texture doesnt load successfully 
+     * as to not cause crashes in other classes trying to access tex */
+    textures.emplace(name, tex);                       
     if (tex == NULL){
         std::cout << "<RESOURCEMANAGER> Failed to load a texture. Error: " << SDL_GetError() << std::endl;
     }

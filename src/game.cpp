@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include <iostream>
 #include <string>
 #include <SDL2/SDL.h>
@@ -7,8 +8,8 @@
 #include "Cube.h"
 #include "Game.h"
 
-Game::Game(ResourceManager* resources, const Point& screenSize):       
-    changeView(""), backgroundShapes(BackgroundShapes(screenSize, 3, 15, 3, Colour(67,76,94,255), 20, 2)), cube(Cube(Point(400,175), 400, Colour(136,192,208,255), 3)){}
+Game::Game(const Point& screenSize):       
+    changeView(""), backgroundShapes(BackgroundShapes(screenSize, 3, 15, 3, Colour(67,76,94,255), 20, 2)), cube(Cube(Point(400,200), 400, Colour(136,192,208,255), 3)){}
 
 std::string Game::update(DisplayManager* display, double dt){
     changeView = "";

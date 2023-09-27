@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include <iostream>
 #include <string>
 #include <SDL2/SDL.h>
@@ -18,6 +19,8 @@ int main(int argc, char* argv[]) {
 
     WindowManager window = WindowManager("Project", Rect(200, 200, 1280, 720), SDL_WINDOW_SHOWN);
     ResourceManager resources = ResourceManager(window.getRenderer());
+    resources.initIMG();
+    resources.initTTF();
     DisplayManager display = DisplayManager(&window);    
     TimeManager time = TimeManager(60);
 
@@ -25,9 +28,9 @@ int main(int argc, char* argv[]) {
     ViewManager viewManager = ViewManager();
 
     MainMenu mainMenu = MainMenu(&resources, display.getSize());
-    Leaderboard leaderboard = Leaderboard(&resources, display.getSize());
-    Settings settings = Settings(&resources, display.getSize());
-    Game game = Game(&resources, display.getSize());
+    Leaderboard leaderboard = Leaderboard(resources.ttf, display.getSize());
+    Settings settings = Settings(display.getSize());
+    Game game = Game(display.getSize());
     
     viewManager.addView("mainmenu", &mainMenu);
     viewManager.addView("leaderboard", &leaderboard);

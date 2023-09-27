@@ -16,7 +16,7 @@ class Game : public View{
     void updateButtons(DisplayManager* display, double dt);
 
     public:
-    Game(ResourceManager* resources, const Point& screenSize);
+    Game(const Point& screenSize);
     std::string update(DisplayManager* display, double dt);
 };
 

@@ -44,21 +44,24 @@ class Triangle : public Shape{
 
 
 class BackgroundShapes{
-    int quantity;              // quantity of shapes that are generated at once
+    int quantity;              // quantity of shapes generated at once
     int rowDelay;              // max time delay between rows of shapes
     int speed;                 // average speed at which shapes fall
     Colour colour;             // colour that shapes are
-    int width;                 // width of shapes (for circles this is diameter)
+    int width;                 // width/diameter of shapes 
     int thickness;             // shape thickness
     int time;
     int randGenTime;
     enum shapeChoices{SQUARE, TRIANGLE, CIRCLE, choices_MAX=3};
-    // gap between shapes relative to width of shape (this value will be multiplied by shape width to find gap between shapes)
+    // gap between shapes relative to width of shape 
+    // (shapeGapW*shape width = gap between shapes)
     float shapeGapW;                                   
-    // deque containing all shapes - using shapeChoices enum - in order of coords
+    // deque containing all shapes in order of coords
     std::deque<std::deque<std::unique_ptr<Shape> > > shapes;          
-    /* sorts each column (of sectionSize) into mini chunks of width self.width to ensure shapes do not end up in same mini chunk
-     * and collide on the way down | each column is a seperate vector with each mini chunk being a boolean value within it */
+    /* sorts each column (of sectionSize) into mini chunks of width 
+     * self.width to ensure shapes do not end up in same mini chunk
+     * and collide on the way down | each column is a seperate vector 
+     * with each mini chunk being a boolean value within it */
     std::vector<std::vector<bool> > columnSlots;    
        
     void initGrid(const Point& size);                    // generate initial grid

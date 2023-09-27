@@ -14,6 +14,7 @@ class MainMenu : public View{
     std::string changeView;
     std::unordered_map<std::string, Button> buttons;
     BackgroundShapes backgroundShapes;
+    ResourceManager* resources;
 
     void updateButtons(DisplayManager* display, double dt);
 

@@ -25,6 +25,8 @@ class DisplayManager{
 
     // BASE DISPLAY MANAGEMENT FUNCTIONS
     void render(SDL_Texture* tex, const Rect& psrc, const Rect& pdest);   
+    // overload with img default image dimensions
+    void render(SDL_Texture* tex, const Point& pos);
     // for setting bg to a static colour        
     void setBg(const Colour& colour);       
     void setDrawColour(const Colour& colour);

@@ -1,24 +1,29 @@
 // CLASS THAT PROVIDES FUNCTIONALITY TO LOAD AND ORGANISE FILES (AUDIO, TEXTURES ETC)
+// AN AREA FOR RESOURCE HANDLING CLASSES TO BE GROUPED
 #ifndef RESOURCEMANAGER_H
 #define RESOURCEMANAGER_H
 
+#include <iostream>
 #include <unordered_map>
 #include <string>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-#include "Utils.h"
+#include "IMGHandler.h"
+#include "TTFHandler.h"
 
 class ResourceManager{
     SDL_Renderer* renderer;
-    std::unordered_map<std::string, SDL_Texture*> textures;
 
     public:
-    ResourceManager(SDL_Renderer* prenderer);                                //requires renderer from windowmanager (should be passed in main.cpp)
-    ~ResourceManager();             // free all textures 
-    void loadTexture(const std::string& name, const char* file);     // load texture and add to texture hashmap
-    void delTexture(const std::string& name);
-    SDL_Texture* getTexture(const std::string& name);                        // return corresponding texture
-    Point getTexSize(const std::string& name);                       // return size of a texture
+    // publically accessible handlers
+    IMGHandler* img;
+    TTFHandler* ttf;
+
+    ResourceManager(SDL_Renderer* renderer);                                
+    ~ResourceManager();              
+    // initialise different handlers
+    void initIMG();               // img requires renderer
+    void initTTF();
 };
 
 #endif

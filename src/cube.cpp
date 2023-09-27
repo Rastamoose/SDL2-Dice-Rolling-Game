@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include <cmath>
 #include <vector>
 #include "Utils.h"

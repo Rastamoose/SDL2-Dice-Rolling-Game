@@ -7,6 +7,7 @@
 #include "Utils.h"
 #include "InputManager.h"
 #include "DisplayManager.h"
+#include "IMGHandler.h"
 
 class Button{
     bool isHovered;
@@ -18,7 +19,7 @@ class Button{
     public:
     bool isPressed;
     
-    Button(ResourceManager* resources, const std::string& animationsPath, double animationDuration, int framesPerSheet, const Point& pos);
+    Button(IMGHandler* imgHandler, const std::string& animationsPath, double animationDuration, int framesPerSheet, const Point& pos);
     void update(InputManager* inputs, double dt);
     void render(DisplayManager* display);
 };

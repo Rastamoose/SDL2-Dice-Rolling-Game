@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include <iostream>
 #include <tuple>
 #include <vector>
@@ -7,7 +8,6 @@
 
 BackgroundShapes::BackgroundShapes(const Point& screenSize, int pquantity, float prowDelay, float pspeed, Colour pcolour, int pwidth, int pthickness):
     quantity(pquantity), rowDelay(prowDelay), speed(pspeed), colour(pcolour), width(pwidth), thickness(pthickness), time(0.0), randGenTime(randint(0,prowDelay)), shapeGapW(0.5){
-    
     initGrid(screenSize);
 }
 
@@ -44,8 +44,8 @@ void BackgroundShapes::initGrid(const Point& size){     // size to fill up (norm
 
 // initialise random shape
 std::unique_ptr<Shape> BackgroundShapes::initRandShape(Point pos, int shapeSpeed, std::pair<int, int> columnPos){
-    shapeChoices shapeType = shapeChoices(randint(0, choices_MAX-1));               // select a shape using a random index
-    std::unique_ptr<Shape> shape;                                                   // declare a unique_ptr of type Shape as if a new unique_ptr is returned straight from switch block with type Shape it will throw an error (due to Shape being abstract)
+    shapeChoices shapeType = shapeChoices(randint(0, choices_MAX-1));   // select a shape using a random index
+    std::unique_ptr<Shape> shape;         // declare a unique_ptr of type Shape as if a new unique_ptr is returned straight from switch block with type Shape it will throw an error (due to Shape being abstract)
     switch(shapeType){
         case SQUARE:            
             shape = std::make_unique<Square>(Square(width, pos, shapeSpeed, colour, thickness, columnPos));            
@@ -68,7 +68,8 @@ std::unique_ptr<Shape> BackgroundShapes::initRandShape(Point pos, int shapeSpeed
 
 // generate a row of shapes
 void BackgroundShapes::genShapes(const Point& size, int yPos){
-    int sectionSize = size.x/quantity + width*shapeGapW;       // split screen into columns of sectionSize
+    // split screen into columns of sectionSize
+    int sectionSize = size.x/quantity + width*shapeGapW;  
     int slotSize = sectionSize/columnSlots.at(0).size();
 
     // make a new row 

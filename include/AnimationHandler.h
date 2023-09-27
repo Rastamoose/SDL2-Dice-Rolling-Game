@@ -7,13 +7,12 @@
 #include <vector>
 #include <utility>
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_render.h>
 #include "Utils.h"
-#include "ResourceManager.h"
+#include "IMGHandler.h"
 #include "DisplayManager.h"
 
 class AnimationHandler{ 
-    ResourceManager* resources;                 // needed to load/access textures
+    IMGHandler* img;                 // needed to load/access textures
     std::string name;
     std::string currentAction;                 
     std::string queuedAction;                  // if an animation is reversible and a new action is set, it is added to this variable as the animation must first reverse before it can switch to this new animation
@@ -30,7 +29,7 @@ class AnimationHandler{
     std::string getActionID(const std::string& action);         // returns an ID which is used to access the texture/information about texture in resource manager          
 
     public:
-    AnimationHandler(ResourceManager* presources, const std::string& pname);
+    AnimationHandler(IMGHandler* pimg, const std::string& pname);
     void addAnimation(const std::string& name, const char* path, double duration, int frames, bool looping=true);      // load spritesheet and make entry in animationData | frames is amount of frames in spritesheet
     void setAction(const std::string& newAction);
     void update(double dt);                              // will find out what type animation is and call either updateLooping() or updateReversible

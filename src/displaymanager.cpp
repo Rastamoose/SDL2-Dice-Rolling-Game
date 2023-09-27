@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include <vector>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL2_gfxPrimitives.h>
@@ -10,6 +11,15 @@ DisplayManager::DisplayManager(WindowManager* pwindow):
 
 // BASE DISPLAY MANAGEMENT FUNCTIONS
 void DisplayManager::render(SDL_Texture* tex, const Rect& src, const Rect& dest){
+    window->render(tex, src, dest);
+}
+
+// overload with img default image dimensions
+void DisplayManager::render(SDL_Texture* tex, const Point& pos){
+    Point size = Point(0,0);
+    SDL_QueryTexture(tex, NULL, NULL, &size.x, &size.y);
+    Rect src = Rect(0,0,size.x,size.y);
+    Rect dest = Rect(pos.x, pos.y, size.x, size.y);
     window->render(tex, src, dest);
 }
 

@@ -4,7 +4,7 @@
 
 #include <stdint.h>
 #include <cstdlib>
-#include <ctime>
+#include <random>
 
 struct Point{
     int x, y;

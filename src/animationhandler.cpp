@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include <string>
 #include <tuple>
 #include <unordered_map>
@@ -7,12 +8,12 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_render.h>
 #include "Utils.h"
-#include "ResourceManager.h"
+#include "IMGHandler.h"
 #include "DisplayManager.h"
 #include "AnimationHandler.h"
 
-AnimationHandler::AnimationHandler(ResourceManager* presources, const std::string& pname):
-    resources(presources), name(pname), currentFrameIndex(0), frameDuration(0.0), isFlipped(State2D(false, false)){}
+AnimationHandler::AnimationHandler(IMGHandler* pimg, const std::string& pname):
+    img(pimg), name(pname), currentFrameIndex(0), frameDuration(0.0), isFlipped(State2D(false, false)){}
 
 bool AnimationHandler::isLooping(const std::string& action){
     return std::get<2>(animationData.at(action));
@@ -62,7 +63,7 @@ void AnimationHandler::updateReversible(int durationOverflow){
 }
 
 void AnimationHandler::addAnimation(const std::string& animationName, const char* path, double duration, int frames, bool looping){
-    resources->loadTexture(getActionID(animationName), path);
+    img->loadTexture(getActionID(animationName), path);
     animationData.emplace(animationName, std::tuple<double, int, bool>{duration, frames, looping});
 
     // if this is first action added then assign that to currentAction to avoid errors
@@ -102,7 +103,7 @@ void AnimationHandler::update(double dt){
     frameDuration += 1*dt;                                  // increase frame duration by amount of frames that should have passed between current frame and previous frame 
 }
 
-void AnimationHandler::renderFrame(Rect* dest, DisplayManager* display){             // requires render function to pass render command to renderer 
+void AnimationHandler::renderFrame(Rect* dest, DisplayManager* display){            
     Point size = getFrameSize(currentAction);
     Rect src = Rect(currentFrameIndex*size.x, 0, size.x, size.y);
 
@@ -112,11 +113,11 @@ void AnimationHandler::renderFrame(Rect* dest, DisplayManager* display){        
         dest->h = src.h;
     }
 
-    display->render(resources->getTexture(getActionID(currentAction)), src, *dest);
+    display->render(img->getTexture(getActionID(currentAction)), src, *dest);
 }
 
 Point AnimationHandler::getFrameSize(const std::string& action){
-    Point size = resources->getTexSize(getActionID(currentAction));                 // get size of spritesheet (spritesheet is assumed to be 1d)
+    Point size = img->getTexSize(getActionID(currentAction));                 // get size of spritesheet (spritesheet is assumed to be 1d)
     size.x = size.x/getNumFrames(action);                       // width of one frame
     return size;
 }

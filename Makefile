@@ -4,7 +4,7 @@ BIN_DIR := $(shell pwd)/bin
 OBJ_DIR := $(shell pwd)/obj
 SRC := $(shell pwd)/src
 CFLAGS := -std=c++20 -m64 -g -Wall
-LFLAGS := -lSDL2 -lSDL2_image -lSDL2_gfx
+LFLAGS := -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_gfx
 OBJECTS = objdir compilesrc
 
 all: $(OBJECTS)

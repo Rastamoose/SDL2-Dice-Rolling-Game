@@ -1,6 +1,6 @@
+#include "stdafx.h"
 #include <stdint.h>
 #include <cstdlib>
-#include <cctype>
 #include <random>
 #include "Utils.h"
 
@@ -16,7 +16,7 @@ Rect::Rect(int px, int py, int pw, int ph):
 State2D::State2D(bool px, bool py):
     x(px), y(py){}
 
-int randint(int start, int max){            // straight off stackoverflow
+int randint(int start, int max){           
     // std::srand(std::time(NULL));        // seed random number generator
 
     // int range = (max-start) + 1;

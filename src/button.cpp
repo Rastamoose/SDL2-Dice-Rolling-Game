@@ -1,14 +1,15 @@
+#include "stdafx.h"
 #include <string>
-#include <iostream>
 #include <SDL2/SDL.h>
 #include "AnimationHandler.h"
 #include "Utils.h"
 #include "InputManager.h"
-#include "ResourceManager.h"
+#include "DisplayManager.h"
+#include "IMGHandler.h"
 #include "Button.h"
 
-Button::Button(ResourceManager* resources, const std::string& animationsPath, double animationDuration, int framesPerSheet, const Point& pos):
-    isHovered(false), animations(AnimationHandler(resources, animationsPath)), rect(Rect(pos.x,pos.y,0,0)), isPressed(false){
+Button::Button(IMGHandler* imgHandler, const std::string& animationsPath, double animationDuration, int framesPerSheet, const Point& pos):
+    isHovered(false), animations(AnimationHandler(imgHandler, animationsPath)), rect(Rect(pos.x,pos.y,0,0)), isPressed(false){
     
     animations.addAnimation("idle", (animationsPath+"/idle.png").c_str(), animationDuration, 1, false);                   // framesPerSheet is 1 for idle (idle animations are not currently animated)
     animations.addAnimation("hover", (animationsPath+"/hover.png").c_str(), animationDuration, framesPerSheet, false);

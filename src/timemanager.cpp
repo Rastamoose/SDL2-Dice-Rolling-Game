@@ -1,4 +1,5 @@
 // TIME MANAGER IMPLEMENTATION USING CHRONO
+#include "stdafx.h"
 #include <chrono>
 #include <iostream>
 #include <cstdint>

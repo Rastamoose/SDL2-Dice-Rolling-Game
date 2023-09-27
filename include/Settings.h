@@ -14,7 +14,7 @@ class Settings : public View{
     void updateButtons(DisplayManager* display, double dt);
 
     public:
-    Settings(ResourceManager* resources, const Point& screenSize);
+    Settings(const Point& screenSize);
     std::string update(DisplayManager* display, double dt);
 };
 
